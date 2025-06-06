@@ -31,3 +31,5 @@ print(hobbies.get("Пікачу"))
 print(hobbies.items()) #1
 print(hobbies.keys()) #2
 print(hobbies.values()) #3
+
+
