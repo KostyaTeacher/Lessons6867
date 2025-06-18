@@ -10,7 +10,6 @@ fruits = ["apple", "banana", "chery", "orange", "watermelon", "kiwi", "dragonfru
 #
 # while True:
 #     print(menu)
-#     answer = int(input("Введіть номер заадчі"))
+#     answer = int(input("Введіть номер задачі"))
 #     if answer == 1:
 #         print()
-#         #TODO
