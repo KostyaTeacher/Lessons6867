@@ -11,3 +11,5 @@ label.pack(padx=20, pady=20)
 label.bind("<Button-1>", on_click)
 
 root.mainloop()
+
+
