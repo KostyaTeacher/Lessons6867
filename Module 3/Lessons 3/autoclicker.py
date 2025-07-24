@@ -5,6 +5,7 @@ import keyboard
 import mouse
 import customtkinter as ctk
 
+SECONDS = 1
 HEIGHT_SIZE = 640 // 2
 WIDTH_SIZE = 600 // 2
 
@@ -14,7 +15,7 @@ delay = 0  # змінна, що зберігатиме тривалість пе
 def start_clicker():
     global running, delay  # "знаходимо" змінні, що існують поза функцією
     clicks_per_second = int(entry.get())
-    delay = 1 / clicks_per_second  # рахуємо затримку між кліками
+    delay = SECONDS / clicks_per_second  # рахуємо затримку між кліками
     messagebox.showinfo("Auto Clicker", "Auto Clicker розпочинає роботу.")
     running = True
     # Запуск процесу кліків
