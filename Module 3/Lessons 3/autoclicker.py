@@ -5,11 +5,11 @@ import keyboard
 import mouse
 import customtkinter as ctk
 
-running = False  # змінна, що зберігатиме стан: програма зараз працює або ні
-delay = 0  # змінна, що зберігатиме тривалість перерви після кожного кліку
-
 HEIGHT_SIZE = 640 // 2
 WIDTH_SIZE = 600 // 2
+
+running = False  # змінна, що зберігатиме стан: програма зараз працює або ні
+delay = 0  # змінна, що зберігатиме тривалість перерви після кожного кліку
 
 def start_clicker():
     global running, delay  # "знаходимо" змінні, що існують поза функцією
