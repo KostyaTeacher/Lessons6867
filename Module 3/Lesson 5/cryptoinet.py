@@ -10,7 +10,9 @@ def get_exchange_rates():
     }
     try:
         response = requests.get(url, params=params)
+        print(response)
         data = response.json()
+        print(data)
         print("📊 Актуальні курси:")
         print(f"BTC → UAH: {data['bitcoin']['uah']}")
         print(f"ETH → UAH: {data['ethereum']['uah']}")
