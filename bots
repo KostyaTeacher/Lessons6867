@@ -1,0 +1,58 @@
+import asyncio
+import json
+import logging
+
+import sys
+from config import BOT_TOKEN
+from commands import (START_BOT_COMMAND, BOOKS_BOT_COMMAND,
+                      BOOKS_BOT_CREATE_COMMAND, BOOKS_COMMAND, BOOKS_CREATE_COMMAND)
+
+from aiogram import Bot, Dispatcher, html
+from aiogram.client.default import DefaultBotProperties
+from aiogram.enums import ParseMode
+from aiogram.filters import CommandStart
+from aiogram.types import Message
+
+from keyboards import books_keyboard_markup
+
+# Bot token can be obtained via https://t.me/BotFather
+TOKEN = BOT_TOKEN
+
+# All handlers should be attached to the Router (or Dispatcher)
+
+dp = Dispatcher()
+
+
+@dp.message(CommandStart())
+async def command_start_handler(message: Message) -> None:
+    logging.info(f"User {message.from_user.username} push command start")
+    await message.answer(f"Вітаю, {html.bold(message.from_user.username)}! \n"
+                         "Я бот для керування бібліотекою книг")
+
+
+def get_books(file_path: str = "data.json", book_id: int | None = None) -> list[dict] | dict:
+    with open(file_path, "r", encoding="utf-8") as fp:
+        books = json.load(fp)
+        if book_id != None and book_id < len(books):
+            return books[book_id]
+        return books
+
+
+@dp.message(BOOKS_COMMAND)
+async def books(message: Message) -> None:
+    data = get_books()
+    markup = books_keyboard_markup(book_list=data)
+    await message.answer(f"Список книг. Натисніть для деталей", reply_markup=markup)
+
+
+
+
+async def main() -> None:
+    bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
+
+    await dp.start_polling(bot)
+
+
+if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO, stream=sys.stdout)
+    asyncio.run(main())
